@@ -15,6 +15,7 @@
 		FA5E79301572FF720016B96D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FA5E792F1572FF720016B96D /* AppDelegate.m */; };
 		FA5E79331572FF720016B96D /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA5E79311572FF720016B96D /* MainStoryboard.storyboard */; };
 		FA5E79361572FF720016B96D /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA5E79351572FF720016B96D /* ViewController.m */; };
+		FA5E793E157300550016B96D /* DrawingView.m in Sources */ = {isa = PBXBuildFile; fileRef = FA5E793D157300550016B96D /* DrawingView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +32,8 @@
 		FA5E79321572FF720016B96D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
 		FA5E79341572FF720016B96D /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		FA5E79351572FF720016B96D /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		FA5E793C157300550016B96D /* DrawingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawingView.h; sourceTree = "<group>"; };
+		FA5E793D157300550016B96D /* DrawingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrawingView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +80,8 @@
 		FA5E79251572FF720016B96D /* DrawingApp */ = {
 			isa = PBXGroup;
 			children = (
+				FA5E793C157300550016B96D /* DrawingView.h */,
+				FA5E793D157300550016B96D /* DrawingView.m */,
 				FA5E792E1572FF720016B96D /* AppDelegate.h */,
 				FA5E792F1572FF720016B96D /* AppDelegate.m */,
 				FA5E79311572FF720016B96D /* MainStoryboard.storyboard */,
@@ -163,6 +168,7 @@
 				FA5E792C1572FF720016B96D /* main.m in Sources */,
 				FA5E79301572FF720016B96D /* AppDelegate.m in Sources */,
 				FA5E79361572FF720016B96D /* ViewController.m in Sources */,
+				FA5E793E157300550016B96D /* DrawingView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
