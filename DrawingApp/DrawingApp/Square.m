@@ -12,26 +12,30 @@
 
 @synthesize xPos;
 @synthesize yPos;
+@synthesize xVel;
+@synthesize yVel;
 
--(Square*)initWithPos: (int) x yPos: (int) y {
+-(Square*) initWithPos: (float) x yPos: (float) y {
     
     self = [super init];
     
     xPos = x;
     yPos = y;
+    xVel = 1;
+    yVel = 1;
     
     return self;
 }
 
--(void)setPos: (int) x newYPos: (int) y {
+-(void) setPos: (float) x newYPos: (float) y {
     NSLog(@"SET DAT POSITION");
     xPos = x;
     yPos = y;
     
-    NSLog(@"xPos: %d", xPos);
+    NSLog(@"xPos: %f", xPos);
 }
 
--(void)draw: (CGContextRef) context {
+-(void) draw: (CGContextRef) context {
     NSLog(@"drawContext");
     CGContextSetLineWidth(context, 2.0);
     CGContextSetStrokeColorWithColor(context, [UIColor blackColor].CGColor);
@@ -42,6 +46,11 @@
     CGContextSetFillColorWithColor(context, [UIColor greenColor].CGColor);
     CGContextFillRect(context, rectangle);
     
+}
+
+-(void) move {
+    xPos += xVel;
+    yPos += yVel;
 }
 
 @end

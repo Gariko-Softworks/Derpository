@@ -12,16 +12,18 @@
 @interface ViewController ()
 
 @property (weak, nonatomic) IBOutlet DrawingView *drawingView;
+@property NSTimer *timer;
 
 @end
 
 @implementation ViewController
 @synthesize drawingView;
+@synthesize timer;
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+    timer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(timestep) userInfo:nil repeats:YES];
 }
 
 - (void)viewDidUnload
@@ -41,6 +43,12 @@
     
     CGPoint tapPoint = [sender locationInView: drawingView];
     [self.drawingView.square setPos: tapPoint.x newYPos: tapPoint.y];
+    [drawingView setNeedsDisplay];
+}
+
+-(void)timestep {
+    NSLog(@"TIMESTEP");
+    [drawingView.square move];
     [drawingView setNeedsDisplay];
 }
 

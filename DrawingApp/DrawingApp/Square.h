@@ -10,11 +10,15 @@
 
 @interface Square : NSObject
 
-@property int xPos;
-@property int yPos;
+@property float xPos;
+@property float yPos;
+@property float xVel;
+@property float yVel;
 
--(Square*)initWithPos: (int) x yPos: (int) y;
+-(Square*)initWithPos: (float) x yPos: (float) y;
+
+-(void)move;
 -(void)draw: (CGContextRef) context;
--(void)setPos: (int) x newYPos: (int) y;
+-(void)setPos: (float) x newYPos: (float) y;
 
 @end
