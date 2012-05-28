@@ -15,5 +15,6 @@
 
 -(Square*)initWithPos: (int) x yPos: (int) y;
 -(void)draw: (CGContextRef) context;
+-(void)setPos: (int) x newYPos: (int) y;
 
 @end
