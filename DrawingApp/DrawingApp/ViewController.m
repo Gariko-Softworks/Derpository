@@ -23,7 +23,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    timer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(timestep) userInfo:nil repeats:YES];
+    timer = [NSTimer scheduledTimerWithTimeInterval:0.025 target:self selector:@selector(timestep) userInfo:nil repeats:YES];
 }
 
 - (void)viewDidUnload
@@ -39,7 +39,6 @@
 }
 
 - (IBAction)singleTapDrawingView:(id)sender {
-    NSLog(@"AW YEAH TAP DAT VIEW");
     
     CGPoint tapPoint = [sender locationInView: drawingView];
     [self.drawingView.square setPos: tapPoint.x newYPos: tapPoint.y];
@@ -48,7 +47,13 @@
 
 -(void)timestep {
     NSLog(@"TIMESTEP");
+    
     [drawingView.square move];
+    
+    if (![drawingView.square checkCollision:[[UIScreen mainScreen] bounds]]) {
+        [drawingView.square accelerate];
+    }
+    
     [drawingView setNeedsDisplay];
 }
 
