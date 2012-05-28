@@ -33,14 +33,19 @@
     return self;
 }
 
--(void) setPos: (float) x newYPos: (float) y {
-    xPos = x;
-    yPos = y;
+-(void) setPos: (CGPoint) point {
+    xPos = point.x;
+    yPos = point.y;
    [self resetVel];
 }
 
+-(void) setVel: (CGPoint) point {
+    xVel = point.x * 0.025;
+    yVel = point.y * 0.025;
+}
+
 -(void) resetVel {
-    xVel = 0;
+    xVel = 3;
     yVel = 0;
 }
 
@@ -60,37 +65,43 @@
     yVel += 0.5;
 }
 
-// Wanna go to bed? Wanna just get shit to work? FUCK GOOD CODING PRACTICE.
-// > I promise to fix this pile of shit in a more cognizant state.
-// >> Really
-// >>> Don't kill me ;___;
+// Wanna go to bed? Wanna just get shit to work? FUCK GOOD CODING PRACTICE. 
+// There is some odd bug that I was playing with when I had to go to bed.
 -(BOOL) checkCollision: (CGRect) bounds {
     
-    if (xPos <= CGRectGetMinX(bounds) && xVel < 0) {
-        xVel = -xVel;
-        xPos = CGRectGetMinX(bounds);
-        return true;
-    }
-        
-    if ((xPos + width) >= CGRectGetMaxX(bounds) && xVel > 0) {
-        xVel = -xVel;
-        xPos = CGRectGetMaxX(bounds) - width;
-        return true;
-    }
+    /*
+    if (CGRectContainsRect(bounds, CGRectMake(xPos, yPos, width, height))) {
+        NSLog(@"Collision Detection Worked Properly");
+        return false;
+    } else {
+    */
     
-    if (yPos <= CGRectGetMinY(bounds) && yVel < 0) {
-        yVel = -yVel;
-        yPos = CGRectGetMinY(bounds);
-        return true;
-    }
+        if (xPos < CGRectGetMinX(bounds) && xVel < 0) {
+            xVel = -xVel;
+            xPos = CGRectGetMinX(bounds);
+            return true;
+        }
         
-    if ((yPos + height) >= CGRectGetMaxY(bounds) && yVel > 0) {
-        yVel = -yVel;
-        yPos = CGRectGetMaxY(bounds) - height;
-        return true;
-    }
-
-    return false;
+        if ((xPos + width) > CGRectGetMaxX(bounds) && xVel >= 0) {
+            xVel = -xVel;
+            xPos = CGRectGetMaxX(bounds) - width;
+            return true;
+        }
+    
+        if (yPos < CGRectGetMinY(bounds) && yVel < 0) {
+            yVel = -yVel;
+            yPos = CGRectGetMinY(bounds);
+            return true;
+        }
+        
+        if ((yPos + height) > CGRectGetMaxY(bounds) && yVel >= 0) {
+            yVel = -yVel;
+            yPos = CGRectGetMaxY(bounds) - height;
+            return true;
+        }
+        
+        return false;
+    //}
 }
 
 -(void) move {

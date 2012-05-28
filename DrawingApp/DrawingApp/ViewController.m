@@ -41,19 +41,28 @@
 - (IBAction)singleTapDrawingView:(id)sender {
     
     CGPoint tapPoint = [sender locationInView: drawingView];
-    [self.drawingView.square setPos: tapPoint.x newYPos: tapPoint.y];
+    [self.drawingView.square setPos: tapPoint];
+    [drawingView setNeedsDisplay];
+}
+
+- (IBAction)panDrawingView:(id)sender {
+    
+    CGPoint translation = [sender translationInView: drawingView];
+    CGPoint velocity = [sender velocityInView: drawingView];
+    
+    [self.drawingView.square setPos: translation];
+    [self.drawingView.square setVel: velocity];
+    
     [drawingView setNeedsDisplay];
 }
 
 -(void)timestep {
-    NSLog(@"TIMESTEP");
     
     [drawingView.square move];
     
     if (![drawingView.square checkCollision:[[UIScreen mainScreen] bounds]]) {
         [drawingView.square accelerate];
     }
-    
     [drawingView setNeedsDisplay];
 }
 

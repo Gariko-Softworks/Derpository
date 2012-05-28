@@ -25,7 +25,8 @@
 -(BOOL)checkCollision: (CGRect) bounds;
 
 -(void)draw: (CGContextRef) context;
--(void)setPos: (float) x newYPos: (float) y;
+-(void)setPos: (CGPoint) point;
+-(void)setVel: (CGPoint) velocity;
 -(void)resetVel;
 
 

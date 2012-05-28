@@ -18,6 +18,7 @@
                         <gestureRecognizers/>
                         <connections>
                             <outletCollection property="gestureRecognizers" destination="enx-zR-bwb" appends="YES" id="tNb-oM-oD8"/>
+                            <outletCollection property="gestureRecognizers" destination="EiR-TG-gfF" appends="YES" id="gxQ-XP-UlV"/>
                         </connections>
                     </view>
                     <connections>
@@ -29,9 +30,21 @@
                         <action selector="singleTapDrawingView:" destination="2" id="MJq-af-iG1"/>
                     </connections>
                 </tapGestureRecognizer>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="EiR-TG-gfF"/>
             </objects>
         </scene>
     </scenes>
+    <classes>
+        <class className="DrawingView" superclassName="UIView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/DrawingView.h"/>
+        </class>
+        <class className="ViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="drawingView" candidateClass="DrawingView"/>
+            </relationships>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
