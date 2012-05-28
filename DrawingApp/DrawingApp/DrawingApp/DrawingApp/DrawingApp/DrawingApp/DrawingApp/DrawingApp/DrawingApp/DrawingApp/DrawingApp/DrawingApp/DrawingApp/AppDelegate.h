@@ -1,5 +1,5 @@
 //
-//  DrawingView.h
+//  AppDelegate.h
 //  DrawingApp
 //
 //  Created by Alexander Ikonomidis on 5/27/12.
@@ -7,10 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Square.h"
 
-@interface DrawingView : UIView
+@interface AppDelegate : UIResponder <UIApplicationDelegate>
 
-@property Square *square;
+@property (strong, nonatomic) UIWindow *window;
 
 @end
