@@ -14,5 +14,6 @@
 @property int yPos;
 
 -(Square*)initWithPos: (int) x yPos: (int) y;
+-(void)draw: (CGContextRef) context;
 
 @end

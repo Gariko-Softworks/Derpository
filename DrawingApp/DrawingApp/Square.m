@@ -23,4 +23,17 @@
     return self;
 }
 
+-(void)draw: (CGContextRef) context {
+    NSLog(@"drawContext");
+    CGContextSetLineWidth(context, 2.0);
+    CGContextSetStrokeColorWithColor(context, [UIColor blueColor].CGColor);
+    CGRect rectangle = CGRectMake(60,170,200,80);
+    CGContextAddRect(context, rectangle);
+    CGContextStrokePath(context);
+    
+    CGContextSetFillColorWithColor(context, [UIColor redColor].CGColor);
+    CGContextFillRect(context, rectangle);
+    
+}
+
 @end

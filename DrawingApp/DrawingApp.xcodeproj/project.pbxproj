@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9BA7E91E1573023300490452 /* Square.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BA7E91D1573023300490452 /* Square.m */; };
+		9BA7E92D1573144A00490452 /* Square.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BA7E92C1573144A00490452 /* Square.m */; };
 		FA5E79201572FF720016B96D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA5E791F1572FF720016B96D /* UIKit.framework */; };
 		FA5E79221572FF720016B96D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA5E79211572FF720016B96D /* Foundation.framework */; };
 		FA5E79241572FF720016B96D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA5E79231572FF720016B96D /* CoreGraphics.framework */; };
@@ -20,8 +20,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		9BA7E91C1573023300490452 /* Square.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Square.h; path = ../Square.h; sourceTree = "<group>"; };
-		9BA7E91D1573023300490452 /* Square.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Square.m; path = ../Square.m; sourceTree = "<group>"; };
+		9BA7E92B1573144A00490452 /* Square.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Square.h; sourceTree = "<group>"; };
+		9BA7E92C1573144A00490452 /* Square.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Square.m; sourceTree = "<group>"; };
 		FA5E791B1572FF720016B96D /* DrawingApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DrawingApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA5E791F1572FF720016B96D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		FA5E79211572FF720016B96D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -83,6 +83,8 @@
 		FA5E79251572FF720016B96D /* DrawingApp */ = {
 			isa = PBXGroup;
 			children = (
+				9BA7E92B1573144A00490452 /* Square.h */,
+				9BA7E92C1573144A00490452 /* Square.m */,
 				FA5E793C157300550016B96D /* DrawingView.h */,
 				FA5E793D157300550016B96D /* DrawingView.m */,
 				FA5E792E1572FF720016B96D /* AppDelegate.h */,
@@ -172,6 +174,7 @@
 				FA5E79301572FF720016B96D /* AppDelegate.m in Sources */,
 				FA5E79361572FF720016B96D /* ViewController.m in Sources */,
 				FA5E793E157300550016B96D /* DrawingView.m in Sources */,
+				9BA7E92D1573144A00490452 /* Square.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
