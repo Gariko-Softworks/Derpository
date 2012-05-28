@@ -7,17 +7,14 @@
 //
 
 #import "DrawingView.h"
-#import "Square.h"
 
 @implementation DrawingView
-
-@synthesize square;
 
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
-        square = [[Square alloc] initWithPos:10.0 yPos:10];
+        // Initialization code
     }
     return self;
 }
@@ -29,12 +26,14 @@
 {
     CGContextRef context = UIGraphicsGetCurrentContext();
     
-    //CGContextSetLineWidth(context, 5.0);
-    //CGContextSetStrokeColorWithColor(context, [UIColor blueColor].CGColor);
-    //CGRect rectangle = CGRectMake(10,70,200,80);
-    //CGContextAddRect(context, rectangle);
-    //CGContextStrokePath(context);
-    [square draw:context];
+    CGContextSetLineWidth(context, 2.0);
+    CGContextSetStrokeColorWithColor(context, [UIColor blueColor].CGColor);
+    CGRect rectangle = CGRectMake(60,170,200,80);
+    CGContextAddRect(context, rectangle);
+    CGContextStrokePath(context);
+    
+    CGContextSetFillColorWithColor(context, [UIColor redColor].CGColor);
+    CGContextFillRect(context, rectangle);
 }
 
 @end

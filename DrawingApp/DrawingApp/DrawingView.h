@@ -7,10 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Square.h"
 
 @interface DrawingView : UIView
-
-@property Square *square;
 
 @end
