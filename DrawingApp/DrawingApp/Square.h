@@ -3,7 +3,7 @@
 //  DrawingApp
 //
 //  Created by Tiernan Garsys on 5/27/12.
-//  Copyright (c) 2012 University of Pennsylvania. All rights reserved.
+//  Copyright (c) 2012 Gariko Softworks. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -22,11 +22,14 @@
 // Basic physics simulation methods, or something of that nature?
 -(void)move;
 -(void)accelerate;
--(BOOL)checkCollision: (CGRect) bounds;
+-(BOOL)doCollision: (CGRect) bounds;
 
 -(void)draw: (CGContextRef) context;
 -(void)setPos: (CGPoint) point;
+-(void)setCenter: (CGPoint) point;
+-(void)translate: (CGPoint) translation;
 -(void)setVel: (CGPoint) velocity;
+-(void)setVel: (CGPoint) velocity withDamper: (float) damper;
 -(void)resetVel;
 
 
