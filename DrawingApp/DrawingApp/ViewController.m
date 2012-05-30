@@ -14,6 +14,9 @@
 @property (weak, nonatomic) IBOutlet DrawingView *drawingView;
 @property NSTimer *timer;
 
+@property (strong, nonatomic) IBOutlet UIPanGestureRecognizer *panRecognizer;
+@property (strong, nonatomic) IBOutlet UITapGestureRecognizer *tapRecognizer;
+
 
 @end
 
@@ -23,6 +26,8 @@ double const damper = 0.025;
 
 @synthesize drawingView;
 @synthesize timer;
+@synthesize panRecognizer;
+@synthesize tapRecognizer;
 
 - (void)viewDidLoad
 {
@@ -33,6 +38,8 @@ double const damper = 0.025;
 - (void)viewDidUnload
 {
     [self setDrawingView:nil];
+    [self setPanRecognizer:nil];
+    [self setTapRecognizer:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -52,24 +59,35 @@ double const damper = 0.025;
 }
 
 // Alex: Doesn't spam at lightning speed anymore :D
-- (IBAction)panDrawingView:(id)sender {
-    NSLog(@"pan");
+// Tiernan: Made dragging a little friendlier; still not perfect, however.
+- (IBAction)panDrawingView:(UIPanGestureRecognizer*)sender {
     CGPoint translation = [sender translationInView: drawingView];
     CGPoint velocity = [sender velocityInView: drawingView];
     
     [self.drawingView.square translate: translation withDamper: damper];
-    [self.drawingView.square setVel: velocity withDamper: damper];
+    
+    if (sender.state == UIGestureRecognizerStateBegan) {
+        [self.drawingView.square setVel: CGPointMake(0, 0) withDamper: damper];
+    } else if (sender.state == UIGestureRecognizerStateRecognized) {
+        [self.drawingView.square setVel: velocity withDamper: damper];
+    }
     
     [drawingView setNeedsDisplay];
 }
 
--(void)timestep {
-    [drawingView.square move];
+-(void)timestep { 
     
-    if (![drawingView.square doCollision:[[UIScreen mainScreen] bounds]]) {
-        [drawingView.square accelerate];
+    // If the user is not touching the screen in any way
+    if (panRecognizer.state == UIGestureRecognizerStatePossible && 
+        tapRecognizer.state == UIGestureRecognizerStatePossible) {
+        
+        [drawingView.square move];
+    
+        if (![drawingView.square doCollision:[[UIScreen mainScreen] bounds]]) {
+            [drawingView.square accelerate];
+        }
+        [drawingView setNeedsDisplay];
     }
-    [drawingView setNeedsDisplay];
 }
 
 @end

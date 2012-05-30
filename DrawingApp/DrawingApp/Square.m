@@ -11,9 +11,9 @@
 /* Tiernan: Since the height and width are hard-coded, I went ahead and moved them up 
  * to be class-constant.
  */
-float gravity = 0.5;
-int width = 80;
-int height = 80;
+float GRAVITY = 0.5;
+int WIDTH = 80;
+int HEIGHT = 80;
 
 @implementation Square
 
@@ -44,7 +44,7 @@ int height = 80;
 
 // Alex: Provided for logical convenience
 -(void) setCenter:(CGPoint)point{
-    [self setPos:CGPointMake(point.x-width/2, point.y-height/2)];
+    [self setPos:CGPointMake(point.x-(WIDTH/2), point.y-(HEIGHT/2))];
 }
 
 /* Alex: Why are all the values coming in so massive? It's like
@@ -77,7 +77,7 @@ int height = 80;
 // Tiernan: Shuffled around to group similar statements, for readability and shit
 -(void) draw: (CGContextRef) context {
     
-    CGRect rectangle = CGRectMake(self.xPos, self.yPos, width, height);
+    CGRect rectangle = CGRectMake(self.xPos, self.yPos, WIDTH, HEIGHT);
     CGContextAddRect(context, rectangle);
     
     CGContextSetStrokeColorWithColor(context, [UIColor blackColor].CGColor);
@@ -93,7 +93,7 @@ int height = 80;
  * if we ever want to change gravity, or want to use consistent grav values elsewhere.
  */
 -(void) accelerate {
-    yVel += gravity;
+    yVel += GRAVITY;
 }
 
 /* Tiernan: Wanna go to bed? Wanna just get shit to work? FUCK GOOD CODING PRACTICE. 
@@ -109,24 +109,24 @@ int height = 80;
  */
 -(BOOL) doCollision: (CGRect) bounds {
     
-     if (CGRectContainsRect(bounds, CGRectMake(xPos, yPos, width, height))) {
+     if (CGRectContainsRect(bounds, CGRectMake(xPos, yPos, WIDTH, HEIGHT))) {
          return false;
      } else {
 
          if (xPos < CGRectGetMinX(bounds)) {
              xVel = -xVel;
              xPos = CGRectGetMinX(bounds);
-         } else if ((xPos + width) > CGRectGetMaxX(bounds)) {
+         } else if ((xPos + WIDTH) > CGRectGetMaxX(bounds)) {
              xVel = -xVel;
-             xPos = CGRectGetMaxX(bounds) - width;
+             xPos = CGRectGetMaxX(bounds) - WIDTH;
          }
     
          if (yPos < CGRectGetMinY(bounds)) {
              yVel = -yVel;
              yPos = CGRectGetMinY(bounds);
-         } else if ((yPos + height) > CGRectGetMaxY(bounds)) {
+         } else if ((yPos + HEIGHT) > CGRectGetMaxY(bounds)) {
              yVel = -yVel;
-             yPos = CGRectGetMaxY(bounds) - height;
+             yPos = CGRectGetMaxY(bounds) - HEIGHT;
          }
     
          return true;
