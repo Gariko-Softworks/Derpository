@@ -77,6 +77,7 @@ int HEIGHT = 80;
 // Tiernan: Shuffled around to group similar statements, for readability and shit
 -(void) draw: (CGContextRef) context {
     
+    UIImage *myImage = [UIImage imageNamed:@"derp.jpeg"];
     CGRect rectangle = CGRectMake(self.xPos, self.yPos, WIDTH, HEIGHT);
     CGContextAddRect(context, rectangle);
     
@@ -84,8 +85,9 @@ int HEIGHT = 80;
     CGContextSetFillColorWithColor(context, [UIColor greenColor].CGColor);
     CGContextSetLineWidth(context, 2.0);
     
-    CGContextStrokePath(context);
-    CGContextFillRect(context, rectangle);
+    //CGContextStrokePath(context);
+    //CGContextFillRect(context, rectangle);
+    [myImage drawInRect: rectangle];
     
 }
 
