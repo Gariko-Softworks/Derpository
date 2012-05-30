@@ -10,13 +10,17 @@
 #import "DrawingView.h"
 
 @interface ViewController ()
-
+ 
 @property (weak, nonatomic) IBOutlet DrawingView *drawingView;
 @property NSTimer *timer;
 
+
 @end
 
+double const damper = 0.025;
+
 @implementation ViewController
+
 @synthesize drawingView;
 @synthesize timer;
 
@@ -53,8 +57,8 @@
     CGPoint translation = [sender translationInView: drawingView];
     CGPoint velocity = [sender velocityInView: drawingView];
     
-    [self.drawingView.square translate: translation];
-    [self.drawingView.square setVel: velocity withDamper: 0.025];
+    [self.drawingView.square translate: translation withDamper: damper];
+    [self.drawingView.square setVel: velocity withDamper: damper];
     
     [drawingView setNeedsDisplay];
 }

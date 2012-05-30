@@ -8,14 +8,19 @@
 
 #import "Square.h"
 
+/* Tiernan: Since the height and width are hard-coded, I went ahead and moved them up 
+ * to be class-constant.
+ */
+float gravity = 0.5;
+int width = 80;
+int height = 80;
+
 @implementation Square
 
 @synthesize xPos;
 @synthesize yPos;
 @synthesize xVel;
 @synthesize yVel;
-@synthesize width;
-@synthesize height;
 
 -(Square*) initWithPos: (float) x yPos: (float) y {
     
@@ -27,10 +32,7 @@
     // Tiernan: Yes, these are hard-coded; look at all the fucks I give for this test app :D
     // Alex: Cleaned a bit using the internal helper method :P
     [self setVel:CGPointMake(3, 3)];
-    
-    width = 80;
-    height = 80;
-    
+
     return self;
 }
 
@@ -47,10 +49,12 @@
 
 /* Alex: Why are all the values coming in so massive? It's like
  * the simulator is running a retina display on a 3GS D:
+ * Tiernan: Changed to maintain consistency with setVel method; pesky damper won't always be 0.025
+   Also, NO FUCKING CLUE; WHAT THE FUCK APPLE. Logical coordinates ain't so logical...
  */
--(void) translate:(CGPoint)translation{
-    xPos = xPos+translation.x*0.025;
-    yPos = yPos+translation.y*0.025;
+-(void) translate:(CGPoint)translation withDamper: (float) damper{
+    xPos = xPos + translation.x * damper;
+    yPos = yPos + translation.y * damper;
     [self resetVel];
 }
 
@@ -70,62 +74,63 @@
     [self setVel:CGPointMake(0, 0)];
 }
 
+// Tiernan: Shuffled around to group similar statements, for readability and shit
 -(void) draw: (CGContextRef) context {
-    CGContextSetLineWidth(context, 2.0);
-    CGContextSetStrokeColorWithColor(context, [UIColor blackColor].CGColor);
-    CGRect rectangle = CGRectMake(self.xPos, self.yPos, self.width, self.height);
-    CGContextAddRect(context, rectangle);
-    CGContextStrokePath(context);
     
+    CGRect rectangle = CGRectMake(self.xPos, self.yPos, width, height);
+    CGContextAddRect(context, rectangle);
+    
+    CGContextSetStrokeColorWithColor(context, [UIColor blackColor].CGColor);
     CGContextSetFillColorWithColor(context, [UIColor greenColor].CGColor);
+    CGContextSetLineWidth(context, 2.0);
+    
+    CGContextStrokePath(context);
     CGContextFillRect(context, rectangle);
     
 }
 
+/* Tiernan: Defined gravity as a class constant, and used it here; will make life easier
+ * if we ever want to change gravity, or want to use consistent grav values elsewhere.
+ */
 -(void) accelerate {
-    yVel += 0.5;
+    yVel += gravity;
 }
 
 /* Tiernan: Wanna go to bed? Wanna just get shit to work? FUCK GOOD CODING PRACTICE. 
  * There is some odd bug that I was playing with when I had to go to bed.
  */
 // Alex: Cleaned it up a bit logically
+/* Tiernan: Cleaned up to be slightly less redundant; my if-else structure here initially
+ * caused the bug wherein the box would bounce higher with each successive bounce, but 
+ * whatever changes you made appear to have re-caused that bug, so I went ahead with the
+ * cleaner styling and skipping of unneccesary computation when no collision occurs. 
+ * (Skipping bounds checks if the bouncy one is fully inbounds) (Yes, computationally 
+ * trivial, but look at all the fucks I give).
+ */
 -(BOOL) doCollision: (CGRect) bounds {
     
-    /*
      if (CGRectContainsRect(bounds, CGRectMake(xPos, yPos, width, height))) {
-     NSLog(@"Collision Detection Worked Properly");
-     return false;
+         return false;
      } else {
-     */
+
+         if (xPos < CGRectGetMinX(bounds)) {
+             xVel = -xVel;
+             xPos = CGRectGetMinX(bounds);
+         } else if ((xPos + width) > CGRectGetMaxX(bounds)) {
+             xVel = -xVel;
+             xPos = CGRectGetMaxX(bounds) - width;
+         }
     
-    /* Alex: Velocity checks are unneded, as the box is guaranteed to
-     * be in-bounds if the velocity is correct. If they're there, 
-     * and the box somehow ends up out of bounds with no velocity,
-     * it'll never be moved back in.
-     */
-    if (xPos < CGRectGetMinX(bounds)) {
-        xVel = -xVel;
-        xPos = CGRectGetMinX(bounds);
-        return true;
-    } else if ((xPos + width) > CGRectGetMaxX(bounds)) {
-        xVel = -xVel;
-        xPos = CGRectGetMaxX(bounds) - width;
-        return true;
-    }
+         if (yPos < CGRectGetMinY(bounds)) {
+             yVel = -yVel;
+             yPos = CGRectGetMinY(bounds);
+         } else if ((yPos + height) > CGRectGetMaxY(bounds)) {
+             yVel = -yVel;
+             yPos = CGRectGetMaxY(bounds) - height;
+         }
     
-    if (yPos < CGRectGetMinY(bounds)) {
-        yVel = -yVel;
-        yPos = CGRectGetMinY(bounds);
-        return true;
-    } else if ((yPos + height) > CGRectGetMaxY(bounds)) {
-        yVel = -yVel;
-        yPos = CGRectGetMaxY(bounds) - height;
-        return true;
-    }
-    
-    return false;
-    //}
+         return true;
+     }
 }
 
 -(void) move {

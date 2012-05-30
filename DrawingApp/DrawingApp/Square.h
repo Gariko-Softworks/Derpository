@@ -14,8 +14,6 @@
 @property float yPos;
 @property float xVel;
 @property float yVel;
-@property float height;
-@property float width;
 
 -(Square*)initWithPos: (float) x yPos: (float) y;
 
@@ -27,7 +25,7 @@
 -(void)draw: (CGContextRef) context;
 -(void)setPos: (CGPoint) point;
 -(void)setCenter: (CGPoint) point;
--(void)translate: (CGPoint) translation;
+-(void)translate: (CGPoint) translation withDamper: (float) damper;
 -(void)setVel: (CGPoint) velocity;
 -(void)setVel: (CGPoint) velocity withDamper: (float) damper;
 -(void)resetVel;
